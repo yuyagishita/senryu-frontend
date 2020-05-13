@@ -4,6 +4,7 @@ services:
         build: .
         volumes:
             - .:/usr/src/app
-        command: sh -c "yarn start"
+        working_dir: /usr/src/app/nextjs-blog
+        command: sh -c "npm run dev"
         ports:
             - "3000:3000"
