@@ -4,7 +4,7 @@ FROM node:13
 WORKDIR /usr/src/app/
 COPY . .
 
-WORKDIR /usr/src/app/nextjs-blog
+WORKDIR /usr/src/app/my-next-app
 RUN npm install
 RUN npm run build
 
