@@ -9,7 +9,11 @@ export default function Post({
   postData,
 }: {
   postData: {
-    user: { firstName: string; lastName: string; username: string };
+    user: {
+      firstName: string;
+      lastName: string;
+      username: string;
+    };
   };
 }) {
   return (
@@ -24,22 +28,17 @@ export default function Post({
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const url = "http://localhost:8080/login";
-  //   const method = "POST";
-  //   const body = { username: "yagiyu", password: "miran" };
-  //   const headers = {
-  //     Accept: "application/json",
-  //     "Content-Type": "application/json",
-  //   };
-  const res = await fetch(url, {
+  let postData = {};
+  await fetch(url, {
     method: "POST",
     cache: "no-cache",
     headers: {
-      "Content-Type": "application/json; charset=utf-8",
+      "Content-Type": "application/json charset=utf-8",
     },
     body: JSON.stringify({ username: "yagiyu", password: "miran" }),
   })
     .then(function (response) {
-      const postData = response.json();
+      postData = response.json();
     })
     .then(function (myJson) {
       console.log(JSON.stringify(myJson));
