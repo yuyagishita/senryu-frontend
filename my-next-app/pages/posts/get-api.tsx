@@ -1,5 +1,4 @@
 import Layout from "../../components/layout";
-import { getAllPostIds, getPostData } from "../../lib/posts";
 import Head from "next/head";
 import Date from "../../components/date";
 import utilStyles from "../../styles/utils.module.css";
@@ -18,7 +17,8 @@ export default function Post({ postData }: { postData: any }) {
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const url = "http://localhost:8080/login";
+  // const url = "http://localhost:8080/login";
+  const url = "http://user:8080/login";
   // const postData = {};
   // await fetch(url, {
   //   method: "POST",

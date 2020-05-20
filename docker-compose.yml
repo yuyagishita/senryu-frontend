@@ -4,7 +4,13 @@ services:
         build: .
         volumes:
             - .:/usr/src/app
-        # working_dir: /usr/src/app/nextjs-blog
-        # command: npm run dev
+        working_dir: /usr/src/app/my-next-app
+        command: npm run dev
         ports:
             - "3000:3000"
+        networks:
+            - shared-network
+
+networks:
+    shared-network:
+        external: true
