@@ -11,7 +11,7 @@ export default function Home() {
       <Head>
         <title>{siteTitle}</title>
       </Head>
-      aaaa
+      <h1>NANPA TOP</h1>
     </Layout>
   );
 }
