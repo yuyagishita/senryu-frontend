@@ -9,59 +9,50 @@ import { emitKeypressEvents } from "readline";
 import { useCallback, useEffect, useState, HtmlHTMLAttributes } from "react";
 import fetch from "isomorphic-unfetch";
 import { userInfo } from "os";
+import { useForm } from "react-hook-form";
+
+type FormData = {
+  username: string;
+  password: string;
+};
 
 export default function Login() {
-  const useInput = (initailValue: string) => {
-    const [value, set] = useState(initailValue);
-    return {
-      value,
-      onChange: (e: React.ChangeEvent<HTMLFormElement>) => set(e.target.value),
-    };
-  };
-  const username = useInput("");
-  const password = useInput("");
+  // const handleSubmit = useCallback(
+  //   async (e: React.FormEvent<HTMLFormElement>) => {
+  //     e.preventDefault();
+  //     console.log(e.target);
+  //     console.log(e.target);
+  //     // const url = "http://user:8080/login";
 
-  const handleSubmit = useCallback(
-    async (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      console.log(e.target);
-      console.log(e.target);
-      // const url = "http://user:8080/login";
+  //     const url = "api/login";
 
-      const url = "api/login";
+  //     const response = await fetch(url, {
+  //       method: "POST",
+  //       cache: "no-cache",
+  //       headers: {
+  //         "Content-Type": "application/json charset=utf-8",
+  //       },
+  //       mode: "no-cors", // no-cors, c
+  //       body: JSON.stringify({ username: "yagiyu", password: "miran" }),
+  //     });
+  //     const postData = await response.json();
+  //     console.log(postData);
+  //   },
+  //   []
+  // );
 
-      const response = await fetch(url, {
-        method: "POST",
-        cache: "no-cache",
-        headers: {
-          "Content-Type": "application/json charset=utf-8",
-        },
-        mode: "no-cors", // no-cors, c
-        body: JSON.stringify({ username: "yagiyu", password: "miran" }),
-      });
-      const postData = await response.json();
-      console.log(postData);
-      // Router.push("/auth");
+  // useEffect(() => {
+  //   // Prefetch the dashboard page as the user will go there after the login
+  //   Router.prefetch("/auth");
+  // }, []);
+  const { register, setValue, handleSubmit, watch, errors } = useForm<
+    FormData
+  >();
+  const onSubmit = handleSubmit(({ username, password }) => {
+    console.log(username, password);
+  });
 
-      // fetch(url, {
-      //   method: "POST",
-      //   cache: "no-cache",
-      //   headers: {
-      //     "Content-Type": "application/json charset=utf-8",
-      //   },
-      //   body: JSON.stringify({ username: "yagiyu", password: "miran" }),
-      // }).then((res) => {
-      //   console.log(res);
-      //   Router.push("/auth");
-      // });
-    },
-    []
-  );
-
-  useEffect(() => {
-    // Prefetch the dashboard page as the user will go there after the login
-    Router.prefetch("/auth");
-  }, []);
+  console.log(watch("username"));
 
   return (
     <Layout home>
@@ -69,22 +60,38 @@ export default function Login() {
         <title>{siteTitle}</title>
       </Head>
       <h1>NANPA Login</h1>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={onSubmit}>
         <div className="filed">
           <label className="label">username</label>
           <input
+            name="username"
             className="input"
             type="username"
             placeholder="username"
-            {...username}
+            ref={register}
           />
         </div>
         <div className="filed">
           <label className="label">password</label>
-          <input className="input" type="password" placeholder="password" />
+          <input
+            name="password"
+            className="input"
+            type="password"
+            placeholder="password"
+            ref={register}
+          />
         </div>
         <div className="filed">
-          <button className="button">login</button>
+          <button
+            className="button"
+            type="button"
+            onClick={() => {
+              setValue("username", "yu");
+              setValue("password", "aaa");
+            }}
+          >
+            login
+          </button>
         </div>
       </form>
     </Layout>
