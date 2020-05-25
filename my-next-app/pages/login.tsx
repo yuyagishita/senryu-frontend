@@ -48,11 +48,10 @@ export default function Login() {
   const { register, setValue, handleSubmit, watch, errors } = useForm<
     FormData
   >();
-  const onSubmit = handleSubmit(({ username, password }) => {
-    console.log(username, password);
-  });
+  const onSubmit = (data: FormData): void => console.log(data);
 
   console.log(watch("username"));
+  console.log(watch("password"));
 
   return (
     <Layout home>
@@ -60,38 +59,17 @@ export default function Login() {
         <title>{siteTitle}</title>
       </Head>
       <h1>NANPA Login</h1>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="filed">
           <label className="label">username</label>
-          <input
-            name="username"
-            className="input"
-            type="username"
-            placeholder="username"
-            ref={register}
-          />
+          <input name="username" placeholder="username" ref={register} />
         </div>
         <div className="filed">
           <label className="label">password</label>
-          <input
-            name="password"
-            className="input"
-            type="password"
-            placeholder="password"
-            ref={register}
-          />
+          <input name="password" placeholder="password" ref={register} />
         </div>
         <div className="filed">
-          <button
-            className="button"
-            type="button"
-            onClick={() => {
-              setValue("username", "yu");
-              setValue("password", "aaa");
-            }}
-          >
-            login
-          </button>
+          <button>login</button>
         </div>
       </form>
     </Layout>
