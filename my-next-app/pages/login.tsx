@@ -45,9 +45,7 @@ export default function Login() {
   //   // Prefetch the dashboard page as the user will go there after the login
   //   Router.prefetch("/auth");
   // }, []);
-  const { register, setValue, handleSubmit, watch, errors } = useForm<
-    FormData
-  >();
+  const { register, handleSubmit, watch, errors } = useForm<FormData>();
   const onSubmit = (data: FormData): void => console.log(data);
 
   console.log(watch("username"));
@@ -62,11 +60,21 @@ export default function Login() {
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="filed">
           <label className="label">username</label>
-          <input name="username" placeholder="username" ref={register} />
+          <input
+            name="username"
+            placeholder="username"
+            ref={register({ required: true })}
+          />
+          {errors.username && "usernameを入力してください。"}
         </div>
         <div className="filed">
           <label className="label">password</label>
-          <input name="password" placeholder="password" ref={register} />
+          <input
+            name="password"
+            placeholder="password"
+            ref={register({ required: true })}
+          />
+          {errors.password && "passwordを入力してください。"}
         </div>
         <div className="filed">
           <button>login</button>
