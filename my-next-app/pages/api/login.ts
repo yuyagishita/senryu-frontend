@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default (req: NextApiRequest, res: NextApiResponse) => {
-  console.log("req" + req);
+  console.log(req);
   //   const response = await fetch(url, {
   //     method: "POST",
   //     cache: "no-cache",

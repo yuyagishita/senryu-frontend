@@ -17,39 +17,31 @@ type FormData = {
 };
 
 export default function Login() {
-  // const handleSubmit = useCallback(
-  //   async (e: React.FormEvent<HTMLFormElement>) => {
-  //     e.preventDefault();
-  //     console.log(e.target);
-  //     console.log(e.target);
-  //     // const url = "http://user:8080/login";
-
-  //     const url = "api/login";
-
-  //     const response = await fetch(url, {
-  //       method: "POST",
-  //       cache: "no-cache",
-  //       headers: {
-  //         "Content-Type": "application/json charset=utf-8",
-  //       },
-  //       mode: "no-cors", // no-cors, c
-  //       body: JSON.stringify({ username: "yagiyu", password: "miran" }),
-  //     });
-  //     const postData = await response.json();
-  //     console.log(postData);
-  //   },
-  //   []
-  // );
-
   // useEffect(() => {
   //   // Prefetch the dashboard page as the user will go there after the login
   //   Router.prefetch("/auth");
   // }, []);
   const { register, handleSubmit, watch, errors } = useForm<FormData>();
-  const onSubmit = (data: FormData): void => console.log(data);
+  const onSubmit = useCallback(async (data: FormData) => {
+    console.log(data);
+    console.log(data.username);
+    const url = "api/login";
+    const response = await fetch(url, {
+      method: "POST",
+      body: JSON.stringify({ username: "yagiyu", password: "miran" }),
+    });
+    const postData = await response.json();
+    console.log(postData);
+  }, []);
+  // const onSubmit = (data: FormData): void => {
+  //   console.log(data);
+  //   console.log(data.username);
 
-  console.log(watch("username"));
-  console.log(watch("password"));
+  //   const url = "api/login";
+  // };
+
+  // console.log(watch("username"));
+  // console.log(watch("password"));
 
   return (
     <Layout home>
