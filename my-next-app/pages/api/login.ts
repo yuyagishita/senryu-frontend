@@ -24,5 +24,5 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   });
   const postData = await response.json();
   console.log(postData);
-  res.status(200).json({ text: "Hello" });
+  res.status(200).json({ postData });
 };
