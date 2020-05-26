@@ -24,7 +24,6 @@ export default function Login() {
   const { register, handleSubmit, watch, errors } = useForm<FormData>();
   const onSubmit = useCallback(async (data: FormData) => {
     console.log(data);
-    console.log(data.username);
     const url = "api/login";
     const response = await fetch(url, {
       method: "POST",
