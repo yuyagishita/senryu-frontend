@@ -17,10 +17,6 @@ type FormData = {
 };
 
 export default function Login() {
-  // useEffect(() => {
-  //   // Prefetch the dashboard page as the user will go there after the login
-  //   Router.prefetch("/auth");
-  // }, []);
   const { register, handleSubmit, watch, errors } = useForm<FormData>();
   const onSubmit = useCallback(async (data: FormData) => {
     console.log(data);
@@ -35,15 +31,9 @@ export default function Login() {
     const postData = await response.json();
     console.log(postData);
   }, []);
-  // const onSubmit = (data: FormData): void => {
-  //   console.log(data);
-  //   console.log(data.username);
 
-  //   const url = "api/login";
-  // };
-
-  // console.log(watch("username"));
-  // console.log(watch("password"));
+  console.log(watch("username"));
+  console.log(watch("password"));
 
   return (
     <Layout home>
