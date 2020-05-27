@@ -1,9 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-interface Login {
+type Login = {
   username: string;
   password: string;
-}
+};
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   // const aa: Login = req.body;
@@ -27,6 +27,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     console.log(postData);
     res.status(200).json({ postData });
   } catch (err) {
-    console.error(err);
+    console.error("ログイン処理でエラーが発生", err);
+    res.status(500).json({ error: "入力された値に誤りがあります。" });
   }
 };

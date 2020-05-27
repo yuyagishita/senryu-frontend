@@ -8,12 +8,16 @@ import Router from "next/router";
 import { emitKeypressEvents } from "readline";
 import { useCallback, useEffect, useState, HtmlHTMLAttributes } from "react";
 import fetch from "isomorphic-unfetch";
-import { userInfo } from "os";
+import { userInfo, type } from "os";
 import { useForm } from "react-hook-form";
 
 type FormData = {
   username: string;
   password: string;
+};
+
+type PostData = {
+  error: string;
 };
 
 export default function Login() {
@@ -28,8 +32,13 @@ export default function Login() {
         password: data.password,
       }),
     });
-    const postData = await response.json();
+    const postData: PostData = await response.json();
     console.log(postData);
+    if (response.status == 200) {
+      Router.push("/auth");
+    } else {
+      alert(postData.error);
+    }
   }, []);
 
   console.log(watch("username"));
