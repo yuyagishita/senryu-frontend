@@ -16,7 +16,17 @@ type FormData = {
   password: string;
 };
 
-type PostData = {
+type LoginSuccessData = {
+  postData: {
+    user: {
+      firstName: string;
+      lastName: string;
+      username: string;
+    };
+  };
+};
+
+type LoginFailureData = {
   error: string;
 };
 
@@ -32,12 +42,21 @@ export default function Login() {
         password: data.password,
       }),
     });
-    const postData: PostData = await response.json();
-    console.log(postData);
     if (response.status == 200) {
-      Router.push("/auth");
+      const loginSuccessData: LoginSuccessData = await response.json();
+      console.log(loginSuccessData);
+      Router.push({
+        pathname: "/auth",
+        query: {
+          firstName: loginSuccessData.postData.user.firstName,
+          lastName: loginSuccessData.postData.user.lastName,
+          username: loginSuccessData.postData.user.username,
+        },
+      });
     } else {
-      alert(postData.error);
+      const loginFailureData: LoginFailureData = await response.json();
+      console.log(loginFailureData);
+      alert(loginFailureData.error);
     }
   }, []);
 

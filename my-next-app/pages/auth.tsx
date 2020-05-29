@@ -4,8 +4,12 @@ import utilStyles from "../styles/utils.module.css";
 import Link from "next/link";
 import Date from "../components/date";
 import { GetStaticProps } from "next";
+import { useRouter } from "next/router";
 
 export default function Login() {
+  const router = useRouter();
+  console.log(router.query);
+
   return (
     <Layout home>
       <Head>
