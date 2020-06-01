@@ -1,14 +1,15 @@
 import { NextApiRequest, NextApiResponse } from "next";
 
-type LoginFormData = {
+type RegisterFormData = {
   username: string;
+  email: string;
   password: string;
 };
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-  const loginFormData: LoginFormData = JSON.parse(req.body);
-  console.log(loginFormData);
-  const url = "http://user:8080/login";
+  const registerFormData: RegisterFormData = JSON.parse(req.body);
+  console.log(registerFormData);
+  const url = "http://user:8080/register";
   try {
     const response = await fetch(url, {
       method: "POST",
@@ -18,8 +19,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
       },
       mode: "no-cors", // no-cors, c
       body: JSON.stringify({
-        username: loginFormData.username,
-        password: loginFormData.password,
+        username: registerFormData.username,
+        email: registerFormData.email,
+        password: registerFormData.password,
       }),
     });
     const postData = await response.json();
