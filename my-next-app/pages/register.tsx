@@ -1,7 +1,5 @@
-import Head from "next/head";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
-import { deserialize } from "v8";
 
 type RegisterFormData = {
   username: string;
@@ -9,7 +7,7 @@ type RegisterFormData = {
   password: string;
 };
 
-type ResponseData = {
+type RegisterResponseData = {
   id: string;
 };
 
@@ -26,7 +24,7 @@ export default function Register() {
         password: data.password,
       }),
     });
-    const responseData: ResponseData = await response.json();
+    const responseData: RegisterResponseData = await response.json();
     console.log(responseData);
   }, []);
 

@@ -5,6 +5,14 @@ type LoginFormData = {
   password: string;
 };
 
+type LoginResponseData = {
+  user: {
+    firstName: string;
+    lastName: string;
+    username: string;
+  };
+};
+
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const loginFormData: LoginFormData = JSON.parse(req.body);
   console.log(loginFormData);
@@ -20,9 +28,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         password: loginFormData.password,
       }),
     });
-    const postData = await response.json();
-    console.log(postData);
-    res.status(200).json({ postData });
+    const loginResponseData: LoginResponseData = await response.json();
+    console.log(loginResponseData.user);
+    res.status(200).json({ user: loginResponseData.user });
   } catch (err) {
     console.error("ログイン処理でエラーが発生", err);
     res.status(500).json({ error: "入力された値に誤りがあります。" });

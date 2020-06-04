@@ -7,7 +7,7 @@ type RegisterFormData = {
   password: string;
 };
 
-type ResponseData = {
+type RegisterResponseData = {
   id: string;
 };
 
@@ -27,7 +27,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         password: registerFormData.password,
       }),
     });
-    const responseData: ResponseData = await response.json();
+    const responseData: RegisterResponseData = await response.json();
     console.log(responseData);
     console.log(responseData.id);
     res.status(200).json({ id: responseData.id });

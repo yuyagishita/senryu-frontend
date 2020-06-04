@@ -11,18 +11,16 @@ import fetch from "isomorphic-unfetch";
 import { userInfo, type } from "os";
 import { useForm } from "react-hook-form";
 
-type FormData = {
+type LoginFormData = {
   username: string;
   password: string;
 };
 
 type LoginSuccessData = {
-  postData: {
-    user: {
-      firstName: string;
-      lastName: string;
-      username: string;
-    };
+  user: {
+    firstName: string;
+    lastName: string;
+    username: string;
   };
 };
 
@@ -31,8 +29,8 @@ type LoginFailureData = {
 };
 
 export default function Login() {
-  const { register, handleSubmit, watch, errors } = useForm<FormData>();
-  const onSubmit = useCallback(async (data: FormData) => {
+  const { register, handleSubmit, watch, errors } = useForm<LoginFormData>();
+  const onSubmit = useCallback(async (data: LoginFormData) => {
     console.log(data);
     const url = "api/login";
     const response = await fetch(url, {
@@ -48,9 +46,9 @@ export default function Login() {
       Router.push({
         pathname: "/auth",
         query: {
-          firstName: loginSuccessData.postData.user.firstName,
-          lastName: loginSuccessData.postData.user.lastName,
-          username: loginSuccessData.postData.user.username,
+          firstName: loginSuccessData.user.firstName,
+          lastName: loginSuccessData.user.lastName,
+          username: loginSuccessData.user.username,
         },
       });
     } else {
