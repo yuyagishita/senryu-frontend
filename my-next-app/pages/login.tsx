@@ -1,14 +1,6 @@
-import Head from "next/head";
-import Layout, { siteTitle } from "../components/layout";
-import utilStyles from "../styles/utils.module.css";
-import Link from "next/link";
-import Date from "../components/date";
-import { GetStaticProps } from "next";
 import Router from "next/router";
-import { emitKeypressEvents } from "readline";
-import { useCallback, useEffect, useState, HtmlHTMLAttributes } from "react";
+import { useCallback } from "react";
 import fetch from "isomorphic-unfetch";
-import { userInfo, type } from "os";
 import { useForm } from "react-hook-form";
 
 type LoginFormData = {
@@ -62,10 +54,7 @@ export default function Login() {
   console.log(watch("password"));
 
   return (
-    <Layout home>
-      <Head>
-        <title>{siteTitle}</title>
-      </Head>
+    <>
       <h1>NANPA Login</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="filed">
@@ -90,6 +79,6 @@ export default function Login() {
           <button>login</button>
         </div>
       </form>
-    </Layout>
+    </>
   );
 }

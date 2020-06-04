@@ -1,5 +1,4 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { type } from "os";
 
 type RegisterFormData = {
   username: string;
