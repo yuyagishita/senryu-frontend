@@ -12,11 +12,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const response = await fetch(url, {
       method: "POST",
-      cache: "no-cache",
       headers: {
         "Content-Type": "application/json charset=utf-8",
       },
-      mode: "no-cors", // no-cors, c
       body: JSON.stringify({
         username: loginFormData.username,
         password: loginFormData.password,

@@ -1,9 +1,14 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import { type } from "os";
 
 type RegisterFormData = {
   username: string;
   email: string;
   password: string;
+};
+
+type ResponseData = {
+  id: string;
 };
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -13,20 +18,19 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   try {
     const response = await fetch(url, {
       method: "POST",
-      cache: "no-cache",
       headers: {
         "Content-Type": "application/json charset=utf-8",
       },
-      mode: "no-cors", // no-cors, c
       body: JSON.stringify({
         username: registerFormData.username,
         email: registerFormData.email,
         password: registerFormData.password,
       }),
     });
-    const postData = await response.json();
-    console.log(postData);
-    res.status(200).json({ postData });
+    const responseData: ResponseData = await response.json();
+    console.log(responseData);
+    console.log(responseData.id);
+    res.status(200).json({ id: responseData.id });
   } catch (err) {
     console.error("ログイン処理でエラーが発生", err);
     res.status(500).json({ error: "入力された値に誤りがあります。" });

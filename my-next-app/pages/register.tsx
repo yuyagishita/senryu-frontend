@@ -3,15 +3,19 @@ import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { deserialize } from "v8";
 
-type FormData = {
+type RegisterFormData = {
   username: string;
   email: string;
   password: string;
 };
 
+type ResponseData = {
+  id: string;
+};
+
 export default function Register() {
-  const { register, handleSubmit, watch, errors } = useForm<FormData>();
-  const onSubmit = useCallback(async (data: FormData) => {
+  const { register, handleSubmit, watch, errors } = useForm<RegisterFormData>();
+  const onSubmit = useCallback(async (data: RegisterFormData) => {
     console.log(data);
     const url = "api/register";
     const response = await fetch(url, {
@@ -22,8 +26,8 @@ export default function Register() {
         password: data.password,
       }),
     });
-    const decision = await response.json();
-    console.log(decision);
+    const responseData: ResponseData = await response.json();
+    console.log(responseData);
   }, []);
 
   console.log(watch("username"));
