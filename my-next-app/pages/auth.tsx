@@ -6,7 +6,7 @@ export default function Login() {
 
   return (
     <>
-      <h1>NANPA Auth</h1>
+      <h1>SENRYU Auth</h1>
     </>
   );
 }

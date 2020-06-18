@@ -34,7 +34,7 @@ export default function Register() {
 
   return (
     <>
-      <h1>NANPA Register</h1>
+      <h1>SENRYU Register</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="filed">
           <label className="label">username</label>

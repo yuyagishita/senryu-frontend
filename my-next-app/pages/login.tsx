@@ -55,7 +55,7 @@ export default function Login() {
 
   return (
     <>
-      <h1>NANPA Login</h1>
+      <h1>SENRYU Login</h1>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="filed">
           <label className="label">username</label>
