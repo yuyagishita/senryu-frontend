@@ -1,4 +1,4 @@
-# nanpa-frontend
+# senryu-frontend
 ## Dockerの使い方
 アプリのビルド方法はプロジェクのルートディレクトリで以下実行
 ```
