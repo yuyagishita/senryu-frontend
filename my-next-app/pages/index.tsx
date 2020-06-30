@@ -17,3 +17,11 @@ export default function Home() {
     </>
   );
 }
+export async function getServerSideProps() {
+  const url = "api/getAll";
+  const response = await fetch(url);
+
+  return {
+    props: {}, // will be passed to the page component as props
+  };
+}
