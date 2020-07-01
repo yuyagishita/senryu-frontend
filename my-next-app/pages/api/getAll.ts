@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
+import fetch from "isomorphic-unfetch";
 
 type GetAllResponseData = {
   post: {
@@ -7,7 +8,7 @@ type GetAllResponseData = {
     nakashichi: string;
     shimogo: string;
     user_id: string;
-    // SignupAt: string;
+    // signup_at: string;
   };
 };
 
