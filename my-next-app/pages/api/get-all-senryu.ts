@@ -14,7 +14,6 @@ type GetAllResponseData = {
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const url = "http://post:8080/get-all";
-  // try {
   const response = await fetch(url, {
     method: "POST",
     headers: {
@@ -25,9 +24,4 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
   const getAllResponseData: GetAllResponseData = await response.json();
   console.log(getAllResponseData);
   res.status(200).json({ post: getAllResponseData.post });
-  // }
-  // catch (err) {
-  //   console.error("全川柳データ取得処理でエラーが発生", err);
-  //   res.status(500).json({ error: "API側でエラー発生" });
-  // }
 };
