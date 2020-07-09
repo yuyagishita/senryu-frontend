@@ -14,14 +14,18 @@ type GetAllResponseData = {
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   const url = "http://post:8080/get-all";
-  const response = await fetch(url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json charset=utf-8",
-    },
-    body: JSON.stringify({}),
-  });
-  const getAllResponseData: GetAllResponseData = await response.json();
-  console.log(getAllResponseData);
-  res.status(200).json({ post: getAllResponseData.post });
+  try {
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json charset=utf-8",
+      },
+      body: JSON.stringify({}),
+    });
+    const getAllResponseData: GetAllResponseData = await response.json();
+    console.log(getAllResponseData);
+    res.status(200).json({ post: getAllResponseData.post });
+  } catch (err) {
+    return err;
+  }
 };
