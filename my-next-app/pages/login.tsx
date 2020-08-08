@@ -11,8 +11,7 @@ type LoginFormData = {
 
 type LoginSuccessData = {
   user: {
-    firstName: string;
-    lastName: string;
+    user_id: string;
     username: string;
   };
 };
