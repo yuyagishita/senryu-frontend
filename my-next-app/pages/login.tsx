@@ -2,6 +2,7 @@ import Router from "next/router";
 import { useCallback } from "react";
 import fetch from "isomorphic-unfetch";
 import { useForm } from "react-hook-form";
+import { parseCookies, setCookie } from "nookies";
 
 type LoginFormData = {
   username: string;
@@ -35,14 +36,21 @@ export default function Login() {
     if (response.status == 200) {
       const loginSuccessData: LoginSuccessData = await response.json();
       console.log(loginSuccessData);
-      Router.push({
-        pathname: "/auth",
-        query: {
-          firstName: loginSuccessData.user.firstName,
-          lastName: loginSuccessData.user.lastName,
-          username: loginSuccessData.user.username,
-        },
+      const cookies = parseCookies();
+      console.log({ cookies });
+      setCookie(null, "user_Id", loginSuccessData.user.username, {
+        maxAge: 30 * 24 * 60 * 60,
+        path: "/",
       });
+
+      // Router.push({
+      //   pathname: "/auth",
+      //   query: {
+      //     firstName: loginSuccessData.user.firstName,
+      //     lastName: loginSuccessData.user.lastName,
+      //     username: loginSuccessData.user.username,
+      //   },
+      // });
     } else {
       const loginFailureData: LoginFailureData = await response.json();
       console.log(loginFailureData);
