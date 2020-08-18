@@ -2,7 +2,7 @@ import Router from "next/router";
 import { useCallback } from "react";
 import fetch from "isomorphic-unfetch";
 import { useForm } from "react-hook-form";
-import { parseCookies, setCookie } from "nookies";
+import { parseCookies, setCookie, destroyCookie } from "nookies";
 
 type LoginFormData = {
   username: string;
@@ -37,7 +37,7 @@ export default function Login() {
       console.log(loginSuccessData);
       const cookies = parseCookies();
       console.log({ cookies });
-      setCookie(null, "user_Id", loginSuccessData.user.username, {
+      setCookie(null, "user_Id", loginSuccessData.user.user_id, {
         maxAge: 30 * 24 * 60 * 60,
         path: "/",
       });
