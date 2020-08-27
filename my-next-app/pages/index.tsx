@@ -2,6 +2,19 @@ import Link from "next/link";
 import fetch from "isomorphic-unfetch";
 import useSWR from "swr";
 
+type GetAllResponseData = {
+  posts: [
+    {
+      id: string;
+      kamigo: string;
+      nakashichi: string;
+      shimogo: string;
+      user_id: string;
+      signup_at: string;
+    }
+  ];
+};
+
 export default function Index() {
   const fetcher = async (url: string) => {
     console.log(url);
@@ -9,31 +22,40 @@ export default function Index() {
       method: "POST",
       body: JSON.stringify({}),
     });
-    return await response.json();
+    const getAllResponseData: GetAllResponseData = await response.json();
+    return getAllResponseData;
   };
 
   const { data, error } = useSWR("/api/get-all-senryu", fetcher);
   console.log(data);
+  console.log(data?.posts[0].kamigo);
 
   if (error) return <div>全川柳データ取得に失敗</div>;
   if (!data) return <div>loading...</div>;
 
-  return (
-    <>
-      <h1>SENRYU TOP</h1>
-      <div>
-        <Link href="/login">
-          <a>ログイン</a>
-        </Link>
+  if (typeof data === "undefined") {
+    return <div>全川柳データ取得に失敗</div>;
+  } else {
+    const listItems = data.posts.map((post) => (
+      <div key={post.id}>
+        {post.kamigo} {post.nakashichi} {post.shimogo}
       </div>
-      <div>
-        <Link href="/register">
-          <a>登録する</a>
-        </Link>
-      </div>
-      <div>
-        {data.post.kamigo} {data.post.nakashichi} {data.post.shimogo}
-      </div>
-    </>
-  );
+    ));
+    return (
+      <>
+        <h1>SENRYU TOP</h1>
+        <div>
+          <Link href="/login">
+            <a>ログイン</a>
+          </Link>
+        </div>
+        <div>
+          <Link href="/register">
+            <a>登録する</a>
+          </Link>
+        </div>
+        {listItems}
+      </>
+    );
+  }
 }

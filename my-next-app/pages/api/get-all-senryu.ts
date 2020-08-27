@@ -2,14 +2,16 @@ import { NextApiRequest, NextApiResponse } from "next";
 import fetch from "isomorphic-unfetch";
 
 type GetAllResponseData = {
-  post: {
-    id: string;
-    kamigo: string;
-    nakashichi: string;
-    shimogo: string;
-    user_id: string;
-    signup_at: string;
-  };
+  posts: [
+    {
+      id: string;
+      kamigo: string;
+      nakashichi: string;
+      shimogo: string;
+      user_id: string;
+      signup_at: string;
+    }
+  ];
 };
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
@@ -24,7 +26,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     });
     const getAllResponseData: GetAllResponseData = await response.json();
     console.log(getAllResponseData);
-    res.status(200).json({ post: getAllResponseData.post });
+    res.status(200).json({ posts: getAllResponseData.posts });
   } catch (err) {
     return err;
   }
