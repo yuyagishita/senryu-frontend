@@ -54,6 +54,11 @@ export default function Index() {
             <a>登録する</a>
           </Link>
         </div>
+        <div>
+          <Link href="/users/:id" as="/users/57a98d98e4b00679b4a830af">
+            <a>マイページ</a>
+          </Link>
+        </div>
         {listItems}
       </>
     );
