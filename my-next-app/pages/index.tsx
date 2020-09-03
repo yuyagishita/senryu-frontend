@@ -5,12 +5,12 @@ import useSWR from "swr";
 type GetAllResponseData = {
   posts: [
     {
-      id: string;
+      postId: string;
       kamigo: string;
       nakashichi: string;
       shimogo: string;
-      user_id: string;
-      signup_at: string;
+      userId: string;
+      signupAt: string;
     }
   ];
 };
@@ -37,7 +37,7 @@ export default function Index() {
     return <div>全川柳データ取得に失敗</div>;
   } else {
     const listItems = data.posts.map((post) => (
-      <div key={post.id}>
+      <div key={post.postId}>
         {post.kamigo} {post.nakashichi} {post.shimogo}
       </div>
     ));
@@ -57,6 +57,11 @@ export default function Index() {
         <div>
           <Link href="/users/:id" as="/users/57a98d98e4b00679b4a830af">
             <a>マイページ</a>
+          </Link>
+        </div>
+        <div>
+          <Link href="/post">
+            <a>投稿する</a>
           </Link>
         </div>
         {listItems}

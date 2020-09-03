@@ -4,7 +4,7 @@ import fetch from "isomorphic-unfetch";
 type GetResponseData = {
   posts: [
     {
-      id: string;
+      post_id: string;
       kamigo: string;
       nakashichi: string;
       shimogo: string;

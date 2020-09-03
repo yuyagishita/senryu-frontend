@@ -6,12 +6,12 @@ import { useRouter } from "next/router";
 type GetResponseData = {
   posts: [
     {
-      id: string;
+      postId: string;
       kamigo: string;
       nakashichi: string;
       shimogo: string;
-      user_id: string;
-      signup_at: string;
+      userId: string;
+      signupAt: string;
     }
   ];
 };
@@ -42,7 +42,7 @@ export default function MyPage() {
     return <div>川柳データ取得に失敗</div>;
   } else {
     const listItems = data.posts.map((post) => (
-      <div key={post.id}>
+      <div key={post.postId}>
         {post.kamigo} {post.nakashichi} {post.shimogo}
       </div>
     ));
