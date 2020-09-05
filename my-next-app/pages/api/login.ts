@@ -7,7 +7,7 @@ type LoginFormData = {
 
 type LoginResponseData = {
   user: {
-    user_id: string;
+    userId: string;
     username: string;
   };
 };

@@ -11,7 +11,7 @@ type LoginFormData = {
 
 type LoginSuccessData = {
   user: {
-    user_id: string;
+    userId: string;
     username: string;
   };
 };
@@ -37,8 +37,8 @@ export default function Login() {
       console.log(loginSuccessData);
       const cookies = parseCookies();
       console.log({ cookies });
-      setCookie(null, "user_Id", loginSuccessData.user.user_id, {
-        maxAge: 30 * 24 * 60 * 60,
+      setCookie(null, "userId", loginSuccessData.user.userId, {
+        maxAge: 60,
         path: "/",
       });
 
