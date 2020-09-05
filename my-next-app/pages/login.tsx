@@ -42,14 +42,9 @@ export default function Login() {
         path: "/",
       });
 
-      // Router.push({
-      //   pathname: "/auth",
-      //   query: {
-      //     firstName: loginSuccessData.user.firstName,
-      //     lastName: loginSuccessData.user.lastName,
-      //     username: loginSuccessData.user.username,
-      //   },
-      // });
+      Router.push({
+        pathname: "/",
+      });
     } else {
       const loginFailureData: LoginFailureData = await response.json();
       console.log(loginFailureData);
