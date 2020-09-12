@@ -43,11 +43,17 @@ export default function MyPage() {
   if (typeof data === "undefined") {
     return <div>川柳データ取得に失敗</div>;
   } else {
-    const listItems = data.posts.map((post) => (
-      <div key={post.postId}>
-        {post.kamigo} {post.nakashichi} {post.shimogo}
-      </div>
-    ));
+    const listItems =
+      data.posts == null ? (
+        <div key="0"></div>
+      ) : (
+        data.posts.map((post) => (
+          <div key={post.postId}>
+            {post.kamigo} {post.nakashichi} {post.shimogo}
+          </div>
+        ))
+      );
+
     return (
       <>
         <h1>SENRYU MyPage</h1>

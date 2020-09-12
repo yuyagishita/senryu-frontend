@@ -43,26 +43,6 @@ export default function Index() {
     return (
       <>
         <h1>SENRYU TOP</h1>
-        <div>
-          <Link href="/login">
-            <a>ログイン</a>
-          </Link>
-        </div>
-        <div>
-          <Link href="/register">
-            <a>登録する</a>
-          </Link>
-        </div>
-        <div>
-          <Link href="/users/:id" as="/users/57a98d98e4b00679b4a830af">
-            <a>マイページ</a>
-          </Link>
-        </div>
-        <div>
-          <Link href="/post">
-            <a>投稿する</a>
-          </Link>
-        </div>
         {listItems}
       </>
     );
