@@ -5,8 +5,6 @@ import React from "react";
 
 function App({ Component, pageProps }: AppProps) {
   const cookies = parseCookies();
-  console.log({ cookies });
-  console.log(cookies.userId);
   const userId = typeof cookies.userId === "undefined" ? "" : cookies.userId;
 
   const headerItems =
@@ -25,7 +23,7 @@ function App({ Component, pageProps }: AppProps) {
         ]
       : [
           <div key="a">
-            <Link href="/users/:id" as="/users/57a98d98e4b00679b4a830af">
+            <Link href="/users/:id" as={`/users/${userId}`}>
               <a>マイページ</a>
             </Link>
           </div>,

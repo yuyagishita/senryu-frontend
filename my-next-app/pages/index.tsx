@@ -28,7 +28,6 @@ export default function Index() {
 
   const { data, error } = useSWR("/api/get-all-senryu", fetcher);
   console.log(data);
-  console.log(data?.posts[0].kamigo);
 
   if (error) return <div>全川柳データ取得に失敗</div>;
   if (!data) return <div>loading...</div>;
