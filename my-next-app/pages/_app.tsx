@@ -1,6 +1,7 @@
-import { AppProps, Container } from "next/app";
+import { AppProps } from "next/app";
 import Link from "next/link";
 import { parseCookies, setCookie, destroyCookie } from "nookies";
+import React from "react";
 
 function App({ Component, pageProps }: AppProps) {
   const cookies = parseCookies();
@@ -36,10 +37,10 @@ function App({ Component, pageProps }: AppProps) {
         ];
 
   return (
-    <Container>
+    <React.Fragment>
       {headerItems}
       <Component {...pageProps} />
-    </Container>
+    </React.Fragment>
   );
 }
 

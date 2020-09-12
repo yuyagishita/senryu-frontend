@@ -2,6 +2,8 @@ import Link from "next/link";
 import fetch from "isomorphic-unfetch";
 import useSWR from "swr";
 import { useRouter } from "next/router";
+import { parseCookies, setCookie, destroyCookie } from "nookies";
+import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
 
 type GetResponseData = {
   posts: [
@@ -54,3 +56,16 @@ export default function MyPage() {
     );
   }
 }
+
+export const getServerSideProps: GetServerSideProps = async (context) => {
+  const cookies = parseCookies(context);
+  const userId = typeof cookies.userId === "undefined" ? "" : cookies.userId;
+  if (userId === "") {
+    context.res.writeHead(302, { Location: "/" });
+    context.res.end();
+  }
+
+  return {
+    props: {},
+  };
+};

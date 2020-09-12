@@ -1,7 +1,6 @@
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { parseCookies, setCookie, destroyCookie } from "nookies";
-import { Router, useRouter } from "next/router";
 import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
 
 type PostFormData = {
@@ -77,9 +76,7 @@ export default function Post() {
 }
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const cookies = parseCookies();
-  console.log({ cookies });
-  console.log(cookies.userId);
+  const cookies = parseCookies(context);
   const userId = typeof cookies.userId === "undefined" ? "" : cookies.userId;
   if (userId === "") {
     context.res.writeHead(302, { Location: "/" });
