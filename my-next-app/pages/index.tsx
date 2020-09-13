@@ -17,7 +17,7 @@ type GetAllResponseData = {
   ];
 };
 
-// CSSの記述
+// CSS
 const SCButton = styled.button`
   color: palevioletred;
 `;
