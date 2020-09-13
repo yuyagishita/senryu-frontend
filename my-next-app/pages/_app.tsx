@@ -14,11 +14,18 @@ import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import BrushIcon from "@material-ui/icons/Brush";
 import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
 import styled from "styled-components";
 
 const StyledBrushIcon = styled(BrushIcon)`
-  margin-right: 20px;
+  margin-right: 16px;
+`;
+const StyledA = styled.a`
+  a: link;
+`;
+const StyledTypography = styled(Typography)`
+  flex-grow: 1;
 `;
 
 function App({ Component, pageProps }: AppProps) {
@@ -35,28 +42,20 @@ function App({ Component, pageProps }: AppProps) {
   const headerItems =
     userId === ""
       ? [
-          <div key="a">
-            <Link href="/login">
-              <a>ログイン</a>
-            </Link>
-          </div>,
-          <div key="b">
-            <Link href="/register">
-              <a>登録する</a>
-            </Link>
-          </div>,
+          <Link href="/login" key="login">
+            <Button color="inherit">ログイン</Button>
+          </Link>,
+          <Link href="/register" key="register">
+            <Button color="inherit">登録する</Button>
+          </Link>,
         ]
       : [
-          <div key="a">
-            <Link href="/users/:id" as={`/users/${userId}`}>
-              <a>マイページ</a>
-            </Link>
-          </div>,
-          <div key="b">
-            <Link href="/post">
-              <a>投稿する</a>
-            </Link>
-          </div>,
+          <Link href="/users/:id" as={`/users/${userId}`} key="mypage">
+            <Button color="inherit">マイページ</Button>
+          </Link>,
+          <Link href="/post" key="post">
+            <Button color="inherit">投稿する</Button>
+          </Link>,
         ];
 
   return (
@@ -67,14 +66,31 @@ function App({ Component, pageProps }: AppProps) {
           <React.Fragment>
             <AppBar position="relative">
               <Toolbar>
-                <StyledBrushIcon />
-                <Typography variant="h6" color="inherit" noWrap>
+                <Link href="/">
+                  <StyledA>
+                    <StyledBrushIcon />
+                  </StyledA>
+                </Link>
+                <StyledTypography variant="h6" color="inherit" noWrap>
                   SENRYU
-                </Typography>
+                </StyledTypography>
+                {headerItems}
               </Toolbar>
             </AppBar>
-            {headerItems}
             <Component {...pageProps} />
+            <footer>
+              <Typography variant="h6" align="center" gutterBottom>
+                SENRYU
+              </Typography>
+              <Typography
+                variant="subtitle1"
+                align="center"
+                color="textSecondary"
+                component="p"
+              >
+                オリジナル川柳をシェアしよう！！
+              </Typography>
+            </footer>
           </React.Fragment>
         </StyledComponentsThemeProvider>
       </MaterialUIThemeProvider>

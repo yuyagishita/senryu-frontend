@@ -17,14 +17,6 @@ type GetAllResponseData = {
   ];
 };
 
-// CSS
-const SCButton = styled.button`
-  color: palevioletred;
-`;
-const MUButton = styled(Button)`
-  color: palevioletred;
-`;
-
 export default function Index() {
   const fetcher = async (url: string) => {
     console.log(url);
@@ -52,8 +44,6 @@ export default function Index() {
     ));
     return (
       <>
-        <SCButton>test</SCButton>
-        <MUButton>test-materi</MUButton>
         <h1>SENRYU TOP</h1>
         {listItems}
       </>
