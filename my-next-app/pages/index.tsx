@@ -3,6 +3,11 @@ import fetch from "isomorphic-unfetch";
 import useSWR from "swr";
 import styled from "styled-components";
 import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
+import { Card } from "@material-ui/core";
+import CardContent from "@material-ui/core/CardContent";
 
 type GetAllResponseData = {
   posts: [
@@ -16,6 +21,18 @@ type GetAllResponseData = {
     }
   ];
 };
+
+const StyledContainer = styled(Container)`
+padding-top: 64px,
+padding-bottom: 64px,
+`;
+const StyledCard = styled(Card)`
+height: "100%",
+display: "flex",
+flex-direction: "column",`;
+const StyledCardContent = styled(CardContent)`
+  flex-grow: 1;
+`;
 
 export default function Index() {
   const fetcher = async (url: string) => {
@@ -42,10 +59,34 @@ export default function Index() {
         {post.kamigo} {post.nakashichi} {post.shimogo}
       </div>
     ));
+
+    const listCardItems = data.posts.map((post) => (
+      <Grid item key={post.postId} xs={12} sm={6} md={4}>
+        <StyledCard>
+          <StyledCardContent>
+            <Typography variant="h5" component="h2">
+              {post.kamigo}
+            </Typography>
+            <Typography variant="h5" component="h2">
+              {post.nakashichi}
+            </Typography>
+            <Typography variant="h5" component="h2">
+              {post.shimogo}
+            </Typography>
+          </StyledCardContent>
+        </StyledCard>
+      </Grid>
+    ));
+
     return (
       <>
-        <h1>SENRYU TOP</h1>
-        {listItems}
+        <main>
+          <StyledContainer maxWidth="md">
+            <Grid container spacing={4}>
+              {listCardItems}
+            </Grid>
+          </StyledContainer>
+        </main>
       </>
     );
   }
