@@ -17,6 +17,14 @@ type GetAllResponseData = {
   ];
 };
 
+// CSSの記述
+const SCButton = styled.button`
+  color: palevioletred;
+`;
+const MUButton = styled(Button)`
+  color: palevioletred;
+`;
+
 export default function Index() {
   const fetcher = async (url: string) => {
     console.log(url);
@@ -30,13 +38,6 @@ export default function Index() {
 
   const { data, error } = useSWR("/api/get-all-senryu", fetcher);
   console.log(data);
-
-  const SCButton = styled.button`
-    color: palevioletred;
-  `;
-  const MUButton = styled(Button)`
-    color: palevioletred;
-  `;
 
   if (error) return <div>全川柳データ取得に失敗</div>;
   if (!data) return <div>loading...</div>;
