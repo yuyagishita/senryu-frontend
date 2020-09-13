@@ -1,6 +1,8 @@
 import Link from "next/link";
 import fetch from "isomorphic-unfetch";
 import useSWR from "swr";
+import styled from "styled-components";
+import Button from "@material-ui/core/Button";
 
 type GetAllResponseData = {
   posts: [
@@ -29,6 +31,13 @@ export default function Index() {
   const { data, error } = useSWR("/api/get-all-senryu", fetcher);
   console.log(data);
 
+  const SCButton = styled.button`
+    color: palevioletred;
+  `;
+  const MUButton = styled(Button)`
+    color: palevioletred;
+  `;
+
   if (error) return <div>全川柳データ取得に失敗</div>;
   if (!data) return <div>loading...</div>;
 
@@ -42,6 +51,8 @@ export default function Index() {
     ));
     return (
       <>
+        <SCButton>test</SCButton>
+        <MUButton>test-materi</MUButton>
         <h1>SENRYU TOP</h1>
         {listItems}
       </>
