@@ -19,10 +19,13 @@ export default function Post() {
   const onSubmit = useCallback(async (data: PostFormData) => {
     console.log(data);
     const url = "api/post-senryu";
+    const cookies = parseCookies();
+    const userId = typeof cookies.userId === "undefined" ? "" : cookies.userId;
+
     const response = await fetch(url, {
       method: "POST",
       body: JSON.stringify({
-        userId: "57a98d98e4b00679b4a830af",
+        userId: userId,
         kamigo: data.kamigo,
         nakashichi: data.nakashichi,
         shimogo: data.shimogo,
