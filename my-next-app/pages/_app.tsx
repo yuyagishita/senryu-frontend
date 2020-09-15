@@ -27,6 +27,9 @@ const StyledA = styled.a`
 const StyledTypography = styled(Typography)`
   flex-grow: 1;
 `;
+const StyledFooter = styled.footer`
+  padding: 48px;
+`;
 
 function App({ Component, pageProps }: AppProps) {
   useEffect(() => {
@@ -62,8 +65,8 @@ function App({ Component, pageProps }: AppProps) {
     <StylesProvider injectFirst>
       <MaterialUIThemeProvider theme={theme}>
         <StyledComponentsThemeProvider theme={theme}>
-          <CssBaseline />
           <React.Fragment>
+            <CssBaseline />
             <AppBar position="relative">
               <Toolbar>
                 <Link href="/">
@@ -78,7 +81,7 @@ function App({ Component, pageProps }: AppProps) {
               </Toolbar>
             </AppBar>
             <Component {...pageProps} />
-            <footer>
+            <StyledFooter>
               <Typography variant="h6" align="center" gutterBottom>
                 SENRYU
               </Typography>
@@ -90,7 +93,7 @@ function App({ Component, pageProps }: AppProps) {
               >
                 オリジナル川柳をシェアしよう！！
               </Typography>
-            </footer>
+            </StyledFooter>
           </React.Fragment>
         </StyledComponentsThemeProvider>
       </MaterialUIThemeProvider>

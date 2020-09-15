@@ -1,8 +1,6 @@
-import Link from "next/link";
 import fetch from "isomorphic-unfetch";
 import useSWR from "swr";
 import styled from "styled-components";
-import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
@@ -22,16 +20,16 @@ type GetAllResponseData = {
   ];
 };
 
-const StyledContainer = styled(Container)`
-padding-top: 64px,
-padding-bottom: 64px,
-`;
 const StyledCard = styled(Card)`
 height: "100%",
 display: "flex",
 flex-direction: "column",`;
 const StyledCardContent = styled(CardContent)`
   flex-grow: 1;
+`;
+const StyledDiv = styled.div`
+  padding-top: 64px;
+  padding-bottom: 48px;
 `;
 
 export default function Index() {
@@ -54,12 +52,6 @@ export default function Index() {
   if (typeof data === "undefined") {
     return <div>全川柳データ取得に失敗</div>;
   } else {
-    const listItems = data.posts.map((post) => (
-      <div key={post.postId}>
-        {post.kamigo} {post.nakashichi} {post.shimogo}
-      </div>
-    ));
-
     const listCardItems = data.posts.map((post) => (
       <Grid item key={post.postId} xs={12} sm={6} md={4}>
         <StyledCard>
@@ -81,11 +73,13 @@ export default function Index() {
     return (
       <>
         <main>
-          <StyledContainer maxWidth="md">
-            <Grid container spacing={4}>
-              {listCardItems}
-            </Grid>
-          </StyledContainer>
+          <StyledDiv>
+            <Container maxWidth="md">
+              <Grid container spacing={4}>
+                {listCardItems}
+              </Grid>
+            </Container>
+          </StyledDiv>
         </main>
       </>
     );
