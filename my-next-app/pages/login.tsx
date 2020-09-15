@@ -4,21 +4,48 @@ import fetch from "isomorphic-unfetch";
 import { useForm } from "react-hook-form";
 import { parseCookies, setCookie, destroyCookie } from "nookies";
 
+import styled from "styled-components";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
+import Grid from "@material-ui/core/Grid";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
+
 type LoginFormData = {
   username: string;
   password: string;
 };
-
 type LoginSuccessData = {
   user: {
     userId: string;
     username: string;
   };
 };
-
 type LoginFailureData = {
   error: string;
 };
+
+const StyledDiv = styled.div`
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const StyledAvatar = styled(Avatar)`
+  margin: 8px;
+  background-color: rgb(220, 0, 78);
+`;
+const StyledForm = styled.form`
+  width: 100%;
+  margin-top: 8px;
+`;
+const StyledButton = styled(Button)`
+  margin: 24px 0 16px;
+`;
 
 export default function Login() {
   const { register, handleSubmit, watch, errors } = useForm<LoginFormData>();
@@ -57,30 +84,62 @@ export default function Login() {
 
   return (
     <>
-      <h1>SENRYU Login</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="filed">
-          <label className="label">username</label>
-          <input
-            name="username"
-            placeholder="username"
-            ref={register({ required: true })}
-          />
-          {errors.username && "usernameを入力してください。"}
-        </div>
-        <div className="filed">
-          <label className="label">password</label>
-          <input
-            name="password"
-            placeholder="password"
-            ref={register({ required: true })}
-          />
-          {errors.password && "passwordを入力してください。"}
-        </div>
-        <div className="filed">
-          <button>login</button>
-        </div>
-      </form>
+      <Container maxWidth="xs">
+        <CssBaseline />
+        <StyledDiv>
+          <StyledAvatar>
+            <LockOutlinedIcon />
+          </StyledAvatar>
+          <Typography component="h1" variant="h5">
+            Sign in
+          </Typography>
+          <StyledForm noValidate onSubmit={handleSubmit(onSubmit)}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              name="username"
+              autoComplete="username"
+              autoFocus
+              inputRef={register({ required: true })}
+              error={errors.username ? true : false}
+              helperText={errors.username && "Usernameを入力してください。"}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              inputRef={register({ required: true })}
+              error={errors.password ? true : false}
+              helperText={errors.password && "Passwordを入力してください。"}
+            />
+            <StyledButton
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+            >
+              Sign In
+            </StyledButton>
+            <Grid container>
+              <Grid item>
+                <Link href="/register" variant="body2">
+                  {"Don't have an account? Sign Up"}
+                </Link>
+              </Grid>
+            </Grid>
+          </StyledForm>
+        </StyledDiv>
+      </Container>
     </>
   );
 }

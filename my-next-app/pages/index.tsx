@@ -72,15 +72,13 @@ export default function Index() {
 
     return (
       <>
-        <main>
-          <StyledDiv>
-            <Container maxWidth="md">
-              <Grid container spacing={4}>
-                {listCardItems}
-              </Grid>
-            </Container>
-          </StyledDiv>
-        </main>
+        <StyledDiv>
+          <Container maxWidth="md">
+            <Grid container spacing={4}>
+              {listCardItems}
+            </Grid>
+          </Container>
+        </StyledDiv>
       </>
     );
   }

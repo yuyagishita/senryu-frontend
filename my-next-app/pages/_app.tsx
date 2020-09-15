@@ -80,7 +80,9 @@ function App({ Component, pageProps }: AppProps) {
                 {headerItems}
               </Toolbar>
             </AppBar>
-            <Component {...pageProps} />
+            <main>
+              <Component {...pageProps} />
+            </main>
             <StyledFooter>
               <Typography variant="h6" align="center" gutterBottom>
                 SENRYU
