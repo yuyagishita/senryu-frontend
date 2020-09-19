@@ -46,18 +46,21 @@ function App({ Component, pageProps }: AppProps) {
     userId === ""
       ? [
           <Link href="/login" key="login">
-            <Button color="inherit">ログイン</Button>
+            <Button color="inherit">Sign in</Button>
           </Link>,
           <Link href="/register" key="register">
-            <Button color="inherit">登録する</Button>
+            <Button color="inherit">Sign up</Button>
           </Link>,
         ]
       : [
           <Link href="/users/:id" as={`/users/${userId}`} key="mypage">
-            <Button color="inherit">マイページ</Button>
+            <Button color="inherit">My page</Button>
           </Link>,
           <Link href="/post" key="post">
-            <Button color="inherit">投稿する</Button>
+            <Button color="inherit">Post</Button>
+          </Link>,
+          <Link href="/signout" key="signout">
+            <Button color="inherit">Sign out</Button>
           </Link>,
         ];
 
