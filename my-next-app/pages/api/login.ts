@@ -32,6 +32,6 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(200).json({ user: loginResponseData.user });
   } catch (err) {
     console.error("ログイン処理でエラーが発生", err);
-    res.status(500).json({ error: "入力された値に誤りがあります。" });
+    res.status(400).json({ error: "入力された値に誤りがあります。" });
   }
 };

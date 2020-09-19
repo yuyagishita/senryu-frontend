@@ -4,6 +4,12 @@ import useSWR from "swr";
 import { useRouter } from "next/router";
 import { parseCookies, setCookie, destroyCookie } from "nookies";
 import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
+import styled from "styled-components";
+import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
+import Container from "@material-ui/core/Container";
+import { Card } from "@material-ui/core";
+import CardContent from "@material-ui/core/CardContent";
 
 type GetResponseData = {
   posts: [
@@ -17,6 +23,25 @@ type GetResponseData = {
     }
   ];
 };
+
+const StyledCard = styled(Card)`
+height: "100%",
+display: "flex",
+flex-direction: "column",`;
+const StyledCardContent = styled(CardContent)`
+  flex-grow: 1;
+`;
+const StyledDiv = styled.div`
+  padding-top: 64px;
+  padding-bottom: 48px;
+`;
+const StyeldH1 = styled.h1`
+  padding: 0.4em 0.5em; /*文字の上下 左右の余白*/
+  color: #494949; /*文字色*/
+  background: #f4f4f4; /*背景色*/
+  border-left: solid 5px #7db4e6; /*左線*/
+  border-bottom: solid 3px #d7d7d7; /*下線*/
+`;
 
 export default function MyPage() {
   const router = useRouter();
@@ -40,24 +65,39 @@ export default function MyPage() {
 
   console.log(id);
 
-  if (typeof data === "undefined") {
+  if (!data) return <div>loading...</div>;
+
+  if (typeof data === "undefined" && error) {
     return <div>川柳データ取得に失敗</div>;
   } else {
-    const listItems =
-      data.posts == null ? (
-        <div key="0"></div>
-      ) : (
-        data.posts.map((post) => (
-          <div key={post.postId}>
-            {post.kamigo} {post.nakashichi} {post.shimogo}
-          </div>
-        ))
-      );
+    const listCardItems = data.posts.map((post) => (
+      <Grid item key={post.postId} xs={12} sm={6} md={4}>
+        <StyledCard>
+          <StyledCardContent>
+            <Typography variant="h5" component="h2">
+              {post.kamigo}
+            </Typography>
+            <Typography variant="h5" component="h2">
+              {post.nakashichi}
+            </Typography>
+            <Typography variant="h5" component="h2">
+              {post.shimogo}
+            </Typography>
+          </StyledCardContent>
+        </StyledCard>
+      </Grid>
+    ));
 
     return (
       <>
-        <h1>SENRYU MyPage</h1>
-        {listItems}
+        <StyledDiv>
+          <Container maxWidth="md">
+            <StyeldH1>My page</StyeldH1>
+            <Grid container spacing={4}>
+              {listCardItems}
+            </Grid>
+          </Container>
+        </StyledDiv>
       </>
     );
   }
