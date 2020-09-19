@@ -113,7 +113,6 @@ export default function Post() {
               label="中七"
               name="nakashichi"
               autoComplete="nakashichi"
-              autoFocus
               inputRef={register({ required: true })}
               error={errors.nakashichi ? true : false}
               helperText={errors.nakashichi && "中七を入力してください。"}
