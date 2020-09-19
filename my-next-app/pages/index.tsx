@@ -31,6 +31,13 @@ const StyledDiv = styled.div`
   padding-top: 64px;
   padding-bottom: 48px;
 `;
+const StyeldH1 = styled.h1`
+  padding: 0.4em 0.5em; /*文字の上下 左右の余白*/
+  color: #494949; /*文字色*/
+  background: #f4f4f4; /*背景色*/
+  border-left: solid 5px #7db4e6; /*左線*/
+  border-bottom: solid 3px #d7d7d7; /*下線*/
+`;
 
 export default function Index() {
   const fetcher = async (url: string) => {
@@ -74,6 +81,7 @@ export default function Index() {
       <>
         <StyledDiv>
           <Container maxWidth="md">
+            <StyeldH1>みんなの川柳</StyeldH1>
             <Grid container spacing={4}>
               {listCardItems}
             </Grid>
