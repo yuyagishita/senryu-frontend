@@ -1,7 +1,16 @@
+import Router from "next/router";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
 import { parseCookies, setCookie, destroyCookie } from "nookies";
 import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
+import styled from "styled-components";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
 
 type PostFormData = {
   userId: string;
@@ -9,10 +18,30 @@ type PostFormData = {
   nakashichi: string;
   shimogo: string;
 };
-
 type PostResponseData = {
   postId: string;
 };
+type LoginFailureData = {
+  error: string;
+};
+
+const StyledDiv = styled.div`
+  margin-top: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+const StyledAvatar = styled(Avatar)`
+  margin: 8px;
+  background-color: rgb(220, 0, 78);
+`;
+const StyledForm = styled.form`
+  width: 100%;
+  margin-top: 8px;
+`;
+const StyledButton = styled(Button)`
+  margin: 24px 0 16px;
+`;
 
 export default function Post() {
   const { register, handleSubmit, watch, errors } = useForm<PostFormData>();
@@ -31,8 +60,18 @@ export default function Post() {
         shimogo: data.shimogo,
       }),
     });
-    const responseData: PostResponseData = await response.json();
-    console.log(responseData);
+    if (response.status == 200) {
+      const responseData: PostResponseData = await response.json();
+      console.log(responseData);
+
+      Router.push({
+        pathname: "/",
+      });
+    } else {
+      const loginFailureData: LoginFailureData = await response.json();
+      console.log(loginFailureData);
+      alert(loginFailureData.error);
+    }
   }, []);
 
   console.log(watch("kamigo"));
@@ -41,39 +80,69 @@ export default function Post() {
 
   return (
     <>
-      <h1>SENRYU Post</h1>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="filed">
-          <label className="label">上五</label>
-          <input
-            name="kamigo"
-            placeholder="テストだよ"
-            ref={register({ required: true })}
-          />
-          {errors.kamigo && "上五を入力してください。"}
-        </div>
-        <div className="filed">
-          <label className="label">中七</label>
-          <input
-            name="nakashichi"
-            placeholder="この投稿は"
-            ref={register({ required: true })}
-          />
-          {errors.nakashichi && "中七を入力してください。"}
-        </div>
-        <div className="filed">
-          <label className="label">下五</label>
-          <input
-            name="shimogo"
-            placeholder="テストだよ"
-            ref={register({ required: true })}
-          />
-          {errors.shimogo && "下五を入力してください。"}
-        </div>
-        <div className="filed">
-          <button>投稿する</button>
-        </div>
-      </form>
+      <Container maxWidth="xs">
+        <CssBaseline />
+        <StyledDiv>
+          <StyledAvatar>
+            <LockOutlinedIcon />
+          </StyledAvatar>
+          <Typography component="h1" variant="h5">
+            Post
+          </Typography>
+          <StyledForm noValidate onSubmit={handleSubmit(onSubmit)}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="kamigo"
+              label="上五"
+              name="kamigo"
+              autoComplete="username"
+              autoFocus
+              inputRef={register({ required: true })}
+              error={errors.kamigo ? true : false}
+              helperText={errors.kamigo && "上五を入力してください。"}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="nakashichi"
+              label="中七"
+              name="nakashichi"
+              autoComplete="nakashichi"
+              autoFocus
+              inputRef={register({ required: true })}
+              error={errors.nakashichi ? true : false}
+              helperText={errors.nakashichi && "中七を入力してください。"}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="shimogo"
+              label="下五"
+              type="shimogo"
+              id="shimogo"
+              autoComplete="shimogo"
+              inputRef={register({ required: true })}
+              error={errors.shimogo ? true : false}
+              helperText={errors.shimogo && "下五を入力してください。"}
+            />
+            <StyledButton
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+            >
+              Post
+            </StyledButton>
+          </StyledForm>
+        </StyledDiv>
+      </Container>
     </>
   );
 }

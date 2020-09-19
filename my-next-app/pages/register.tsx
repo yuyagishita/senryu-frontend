@@ -16,9 +16,11 @@ type RegisterFormData = {
   email: string;
   password: string;
 };
-
 type RegisterResponseData = {
   userId: string;
+};
+type LoginFailureData = {
+  error: string;
 };
 
 const StyledDiv = styled.div`
@@ -65,6 +67,10 @@ export default function Register() {
       Router.push({
         pathname: "/",
       });
+    } else {
+      const loginFailureData: LoginFailureData = await response.json();
+      console.log(loginFailureData);
+      alert(loginFailureData.error);
     }
   }, []);
 
