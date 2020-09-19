@@ -1,8 +1,8 @@
 import Router from "next/router";
 import { useCallback } from "react";
 import { useForm } from "react-hook-form";
-import { parseCookies, setCookie, destroyCookie } from "nookies";
-import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
+import { parseCookies } from "nookies";
+import { GetServerSideProps } from "next";
 import styled from "styled-components";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";

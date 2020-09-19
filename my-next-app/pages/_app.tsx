@@ -1,6 +1,6 @@
 import { AppProps } from "next/app";
 import Link from "next/link";
-import { parseCookies, setCookie, destroyCookie } from "nookies";
+import { parseCookies } from "nookies";
 import React, { useEffect } from "react";
 import { ThemeProvider as StyledComponentsThemeProvider } from "styled-components";
 import {

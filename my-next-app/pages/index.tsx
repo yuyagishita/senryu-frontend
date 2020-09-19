@@ -1,6 +1,6 @@
 import fetch from "isomorphic-unfetch";
 import useSWR from "swr";
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
@@ -38,6 +38,29 @@ const StyeldH1 = styled.h1`
   border-left: solid 5px #7db4e6; /*左線*/
   border-bottom: solid 3px #d7d7d7; /*下線*/
 `;
+const rotate360 = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+const Spinner = styled.div`
+  animation: ${rotate360} 1s linear infinite;
+  transform: translateZ(0);
+
+  border-top: 2px solid grey;
+  border-right: 2px solid grey;
+  border-bottom: 2px solid grey;
+  border-left: 4px solid black;
+  background: transparent;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: auto;
+  margin-left: auto;
+`;
 
 export default function Index() {
   const fetcher = async (url: string) => {
@@ -54,7 +77,17 @@ export default function Index() {
   console.log(data);
 
   if (error) return <div>全川柳データ取得に失敗</div>;
-  if (!data) return <div>loading...</div>;
+  if (!data)
+    return (
+      <div>
+        <StyledDiv>
+          <Container maxWidth="md">
+            <StyeldH1>みんなの川柳</StyeldH1>
+            <Spinner />
+          </Container>
+        </StyledDiv>
+      </div>
+    );
 
   if (typeof data === "undefined") {
     return <div>全川柳データ取得に失敗</div>;

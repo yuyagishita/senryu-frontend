@@ -1,9 +1,8 @@
-import Link from "next/link";
 import fetch from "isomorphic-unfetch";
 import useSWR from "swr";
 import { useRouter } from "next/router";
-import { parseCookies, setCookie, destroyCookie } from "nookies";
-import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
+import { parseCookies } from "nookies";
+import { GetServerSideProps } from "next";
 import styled, { keyframes } from "styled-components";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";

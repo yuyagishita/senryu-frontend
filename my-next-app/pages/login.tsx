@@ -2,7 +2,7 @@ import Router from "next/router";
 import { useCallback } from "react";
 import fetch from "isomorphic-unfetch";
 import { useForm } from "react-hook-form";
-import { parseCookies, setCookie, destroyCookie } from "nookies";
+import { parseCookies, setCookie } from "nookies";
 import styled from "styled-components";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
@@ -62,7 +62,7 @@ export default function Login() {
       const cookies = parseCookies();
       console.log({ cookies });
       setCookie(null, "userId", loginSuccessData.user.userId, {
-        maxAge: 60,
+        maxAge: 3 * 24 * 60 * 60,
         path: "/",
       });
 

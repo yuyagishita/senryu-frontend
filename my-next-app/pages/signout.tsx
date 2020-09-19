@@ -1,5 +1,5 @@
-import { parseCookies, setCookie, destroyCookie } from "nookies";
-import { GetStaticProps, GetStaticPaths, GetServerSideProps } from "next";
+import { destroyCookie } from "nookies";
+import { GetServerSideProps } from "next";
 
 export default function Signout() {
   return <></>;
