@@ -1,11 +1,22 @@
 # senryu-frontend
-## Dockerの使い方
-アプリのビルド方法はプロジェクのルートディレクトリで以下実行
-```
-docker build -t yu-yagishita/nextjs .
-```
 
-以下コマンドで起動。
-```
-docker run -p 3000:3000 yu-yagishita/nextjs:latest
-```
+## 概要
+川柳を共有することができるSNSアプリのフロントエンド
+
+## 技術
+|名前|備考|
+|--|--|
+|Next.js(React)|フロント|
+|TypeScript|フロント|
+|Material-UI|UIコンポーネントライブラリ|
+|styled-components|CSS in JS|
+|Docker|開発環境|
+
+## Build
+### Node
+`my-next-app`配下で`npm install`
+
+## Run
+### Docker Compose
+ルートディレクトリで`docker-compose up`  
+http://localhost:3000/　にアクセス
